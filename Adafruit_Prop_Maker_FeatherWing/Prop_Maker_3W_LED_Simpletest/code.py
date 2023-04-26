@@ -14,7 +14,10 @@ blue = pwmio.PWMOut(board.D13, duty_cycle=0, frequency=20000)
 
 while True:
     for i in range(255):
-        r, g, b = colorwheel(i)
+        color = colorwheel(i)
+        r = (color >> 16) & 0xFF
+        g = (color >> 8) & 0xFF
+        b = color & 0xFF
         red.duty_cycle = int(r * 65536 / 256)
         green.duty_cycle = int(g * 65536 / 256)
         blue.duty_cycle = int(b * 65536 / 256)
